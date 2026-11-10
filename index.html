@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" class="cms-wait">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0A0A0B">
 <meta name="author" content="Amirreza Seydi">
 
-<!-- Open Graph: تصویر اشتراک‌گذاری را با assets/og-cover.jpg جایگزین کن -->
+<!-- متن‌ها، عکس‌ها و ویدیوها از content.json می‌آیند؛ برای ویرایش از پنل /admin استفاده کن -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="امیررضا صیدی — موشن گرافیست و تدوینگر">
 <meta property="og:description" content="موشن گرافیک، تدوین و روایت تصویری. مستقر در تهران.">
@@ -19,7 +19,8 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=4">
+<script>setTimeout(function(){document.documentElement.classList.remove("cms-wait")},2500)</script>
 </head>
 <body>
 
@@ -28,8 +29,8 @@
 <header class="site-header" id="header">
   <div class="wrap header-inner">
     <a class="brand" href="#top">
-      <img class="brand-mark" src="assets/avatar.jpg" alt="امیررضا صیدی" width="36" height="36">
-      <span class="brand-name">امیررضا صیدی</span>
+      <img class="brand-mark" data-c-src="brand.avatar" src="assets/avatar.jpg" alt="امیررضا صیدی" width="36" height="36">
+      <span class="brand-name" data-c="brand.name">امیررضا صیدی</span>
     </a>
 
     <nav class="nav" id="nav">
@@ -53,8 +54,8 @@
     <a href="#contact">تماس</a>
   </nav>
   <div class="mobile-menu-foot">
-    <a href="mailto:amirrezaseydi0@gmail.com">amirrezaseydi0@gmail.com</a>
-    <a href="https://t.me/amirrezaseydi" target="_blank" rel="noopener">تلگرام</a>
+    <a data-c-email href="mailto:amirrezaseydi0@gmail.com">amirrezaseydi0@gmail.com</a>
+    <a data-c-telegram href="https://t.me/amirrezaseydi" target="_blank" rel="noopener">تلگرام</a>
   </div>
 </div>
 
@@ -63,21 +64,21 @@
   <section class="hero">
     <div class="hero-text">
       <div class="hero-inner">
-        <p class="hero-eyebrow">موشن گرافیست · تدوینگر</p>
-        <h1 class="hero-title">امیررضا صیدی</h1>
-        <p class="hero-latin">Amirreza Seydi</p>
-        <p class="hero-lead">موشن‌گرافیست و تدوین‌گر. با رویکرد گزارش تصویری، لوگوموشن و ویدئوی توضیحی برای رسانه‌ها و برندها</p>
+        <p class="hero-eyebrow" data-c="hero.eyebrow">موشن گرافیست · تدوینگر</p>
+        <h1 class="hero-title" data-c="hero.title">امیررضا صیدی</h1>
+        <p class="hero-latin" data-c="hero.latin">Amirreza Seydi</p>
+        <p class="hero-lead" data-c="hero.lead">موشن‌گرافیست و تدوین‌گر. با رویکرد گزارش تصویری، لوگوموشن و ویدئوی توضیحی برای رسانه‌ها و برندها</p>
         <div class="hero-actions">
-          <a class="cta" href="#work">دیدن نمونه‌کارها
+          <a class="cta" href="#work"><span data-c="hero.ctaWork">دیدن نمونه‌کارها</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a class="cta-ghost" href="#contact">تماس</a>
+          <a class="cta-ghost" href="#contact" data-c="hero.ctaContact">تماس</a>
         </div>
-        <p class="hero-loc">تهران، ایران</p>
+        <p class="hero-loc" data-c="hero.location">تهران، ایران</p>
       </div>
     </div>
     <div class="hero-media">
-      <img src="assets/hero.jpg" alt="پرتره امیررضا صیدی" width="1920" height="1080" fetchpriority="high">
+      <img data-c-src="hero.image" data-c-alt="hero.imageAlt" src="assets/hero.jpg" alt="پرتره امیررضا صیدی" width="1920" height="1080" fetchpriority="high">
     </div>
   </section>
 
@@ -87,18 +88,16 @@
       <span>موشن گرافیک</span><i></i><span>تدوین</span><i></i><span>تیزر</span><i></i><span>هویت بصری</span><i></i><span>سناریونویسی</span><i></i><span>هوش مصنوعی</span><i></i>
     </div>
   </div>
-
-  <!-- شوریل: فایل ویدیو را با نام assets/showreel.mp4 کنار بقیه بگذار (ترجیحاً H.264، زیر ۲۰ مگ). تا وقتی نباشد، کاور نمایش داده می‌شود. -->
   <section class="section reel" id="reel">
     <div class="wrap">
       <div class="section-head" data-reveal>
         <div>
-          <p class="label">شوریل</p>
-          <h2 class="section-title">شوریل</h2>
+          <p data-c="reel.label" class="label">شوریل</p>
+          <h2 data-c="reel.title" class="section-title">شوریل</h2>
         </div>
       </div>
       <div class="reel-frame" data-reveal>
-        <video id="reelVideo" src="assets/showreel-web.mp4" poster="assets/poster-showreel.jpg" preload="none" playsinline controls></video>
+        <video id="reelVideo" data-c-src="reel.video" data-c-poster="reel.poster" src="assets/showreel-web.mp4" poster="assets/poster-showreel.jpg" preload="none" playsinline controls></video>
         <button class="reel-play" id="reelPlay" aria-label="پخش شوریل">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
         </button>
@@ -110,8 +109,8 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="label">۰۱ — نمونه‌کارها</p>
-          <h2 class="section-title">کارهای انتخاب‌شده</h2>
+          <p data-c="work.label" class="label">۰۱ — نمونه‌کارها</p>
+          <h2 data-c="work.title" class="section-title">کارهای انتخاب‌شده</h2>
         </div>
         <div class="filters" role="group" aria-label="فیلتر دسته‌بندی">
           <button class="chip is-active" data-filter="all">همه</button>
@@ -119,12 +118,6 @@
           <button class="chip" data-filter="logo">لوگوموشن</button>
         </div>
       </div>
-
-      <!-- هر figure یک نمونه‌کار است.
-           برای عکس: فقط src تگ img را عوض کن.
-           برای ویدیو: به figure صفت data-video بده، مثل
-             <figure class="work-item" data-cat="motion" data-video="assets/work-01.mp4" ...>
-           عکسی که داخل img گذاشته‌ای خودکار می‌شود پوستر ویدیو. -->
       <div class="work-grid" id="workGrid">
 
         <figure class="work-item" data-cat="report" data-reveal
@@ -166,7 +159,7 @@
           </figcaption>
         </figure>
 
-        <figure class="work-item work-item--logo" data-cat="logo" data-reveal
+        <figure class="work-item work-item--wide" data-cat="logo" data-reveal
                 data-video="assets/NOVANO-web.mp4"
                 data-title="لوگوموشن نوانو" data-cat-label="لوگوموشن" data-year="۱۴۰۵"
                 data-desc="انیمیشن لوگوی برند نوانو؛ حرکت مینیمال و تمیز برای شروع و پایان ویدیوهای برند.">
@@ -179,7 +172,7 @@
           </figcaption>
         </figure>
 
-        <figure class="work-item work-item--logo" data-cat="logo" data-reveal
+        <figure class="work-item work-item--wide" data-cat="logo" data-reveal
                 data-video="assets/Kashef.mp4"
                 data-title="لوگوموشن کاشف" data-cat-label="لوگوموشن" data-year="۱۴۰۳"
                 data-desc="انیمیشن لوگوی شرکت کاشف؛ ساخت حرکت از شکل ذره‌بین تا نمایش کامل نشان.">
@@ -194,20 +187,20 @@
 
       </div>
 
-      <p class="work-note" data-reveal>برای دیدن ویدیوهای کامل، روی هر کار کلیک کن. نمونه‌های بلندتر را می‌توانم در تماس بفرستم.</p>
+      <p data-c="work.note" class="work-note" data-reveal>برای دیدن ویدیوهای کامل، روی هر کار کلیک کن. نمونه‌های بلندتر را می‌توانم در تماس بفرستم.</p>
     </div>
   </section>
 
   <section class="section about" id="about">
     <div class="wrap about-grid">
       <div class="about-intro" data-reveal>
-        <p class="label">۰۲ — درباره من</p>
-        <h2 class="section-title">پشت میز تدوین</h2>
+        <p data-c="about.label" class="label">۰۲ — درباره من</p>
+        <h2 data-c="about.title" class="section-title">پشت میز تدوین</h2>
       </div>
 
       <div class="about-body" data-reveal>
-        <p class="lead">موشن‌گرافیست؛ تدوین‌گر و تصویربردار</p>
-        <p>بیشتر کارهام ویدیوهای کوتاه خبری و اقتصادیه؛ موضوعی که باید توی یکی دو دقیقه، با نقشه و نمودار و تصویر، برای مخاطب جا بیفته. معمولاً از سناریو و استوری‌برد شروع می‌کنم و طراحی حرکت و تدوین رو هم خودم انجام می‌دم. لوگوموشن و ویدیوی معرفی برند هم می‌سازم. بیشتر با After Effects و Premiere کار می‌کنم و جاهایی که لازم باشه، مثل ساخت تصویر یا سریع‌تر کردن کار، از هوش مصنوعی هم کمک می‌گیرم.</p>
+        <p class="lead" data-c="about.lead">موشن‌گرافیست؛ تدوین‌گر و تصویربردار</p>
+        <div class="about-text" data-c-paras="about.text"><p>بیشتر کارهام ویدیوهای کوتاه خبری و اقتصادیه؛ موضوعی که باید توی یکی دو دقیقه، با نقشه و نمودار و تصویر، برای مخاطب جا بیفته. معمولاً از سناریو و استوری‌برد شروع می‌کنم و طراحی حرکت و تدوین رو هم خودم انجام می‌دم. لوگوموشن و ویدیوی معرفی برند هم می‌سازم. بیشتر با After Effects و Premiere کار می‌کنم و جاهایی که لازم باشه، مثل ساخت تصویر یا سریع‌تر کردن کار، از هوش مصنوعی هم کمک می‌گیرم.</p></div>
         <ul class="tools" aria-label="ابزارها">
           <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg><span><b>After Effects</b><small>موشن گرافیک</small></span></li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg><span><b>Premiere Pro</b><small>تدوین</small></span></li>
@@ -220,12 +213,12 @@
 
   <section class="section contact" id="contact">
     <div class="wrap">
-      <p class="label" data-reveal>۰۳ — تماس</p>
-      <h2 class="contact-title" data-reveal>پروژه‌ای در ذهن داری؟</h2>
-      <a class="contact-mail" href="mailto:amirrezaseydi0@gmail.com" data-reveal>amirrezaseydi0@gmail.com</a>
+      <p data-c="contact.label" class="label" data-reveal>۰۳ — تماس</p>
+      <h2 data-c="contact.title" class="contact-title" data-reveal>پروژه‌ای در ذهن داری؟</h2>
+      <a class="contact-mail" data-c-email href="mailto:amirrezaseydi0@gmail.com" data-reveal>amirrezaseydi0@gmail.com</a>
       <div class="contact-links" data-reveal>
-        <a href="https://t.me/amirrezaseydi" target="_blank" rel="noopener">تلگرام</a>
-        <a href="tel:+989183407386"><span class="phone" dir="ltr">۰۹۱۸ ۳۴۰ ۷۳۸۶</span></a>
+        <a data-c-telegram href="https://t.me/amirrezaseydi" target="_blank" rel="noopener">تلگرام</a>
+        <a data-c-phone href="tel:+989183407386"><span class="phone" dir="ltr">۰۹۱۸ ۳۴۰ ۷۳۸۶</span></a>
       </div>
     </div>
   </section>
@@ -234,7 +227,7 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <p>© <span id="year">۱۴۰۵</span> امیررضا صیدی | تهران</p>
+    <p>© <span id="year">۱۴۰۵</span> <span data-c="footer.text">امیررضا صیدی | تهران</span></p>
     <a href="#top" class="to-top">بازگشت به بالا ↑</a>
   </div>
 </footer>
@@ -254,6 +247,6 @@
   </figure>
 </div>
 
-<script src="script.js"></script>
+<script src="content.js?v=4"></script>
 </body>
 </html>

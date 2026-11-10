@@ -613,7 +613,7 @@ section[id] { scroll-margin-top: 76px; }
   line-height: 1.8;
 }
 
-.about-body > p:not(.lead) {
+.about-body > p:not(.lead), .about-text p {
   margin: 0 0 42px;
   max-width: 58ch;
   font-size: 15px;
@@ -948,18 +948,18 @@ section[id] { scroll-margin-top: 76px; }
 /* ---------- real work layout: 3 vertical reports + 2 logo motions ---------- */
 .work-grid { grid-template-columns: repeat(6, 1fr); }
 .work-grid .work-item { grid-column: span 2; }
-.work-grid .work-item--logo { grid-column: span 3; }
+.work-grid .work-item--wide { grid-column: span 3; }
 .work-grid .work-btn img, .work-grid .work-btn video,
 .work-item:nth-child(3) .work-btn img, .work-item:nth-child(3) .work-btn video { aspect-ratio: 9 / 16; object-fit: cover; }
-.work-grid .work-item--logo .work-btn img, .work-grid .work-item--logo .work-btn video { aspect-ratio: 16 / 9; }
+.work-grid .work-item--wide .work-btn img, .work-grid .work-item--wide .work-btn video { aspect-ratio: 16 / 9; }
 @media (max-width: 900px) {
   .work-grid { grid-template-columns: repeat(2, 1fr); }
   .work-grid .work-item { grid-column: span 1; }
-  .work-grid .work-item--logo { grid-column: span 2; }
+  .work-grid .work-item--wide { grid-column: span 2; }
 }
 @media (max-width: 560px) {
   .work-grid { grid-template-columns: 1fr; }
-  .work-grid .work-item, .work-grid .work-item--logo { grid-column: span 1; }
+  .work-grid .work-item, .work-grid .work-item--wide { grid-column: span 1; }
 }
 
 /* ---------- type hierarchy (Yekan Bakh weights) ---------- */
@@ -972,7 +972,7 @@ section[id] { scroll-margin-top: 76px; }
 .tools b { font-weight: 700; }
 .cta, .cta-ghost, .chip { font-weight: 600; }
 .nav a { font-weight: 500; }
-.hero-lead, .about-body > p:not(.lead) { font-weight: 400; }
+.hero-lead, .about-body > p:not(.lead), .about-text p { font-weight: 400; }
 .contact-mail { font-weight: 300; }
 
 /* showreel / videos keep their shape in fullscreen */
@@ -1064,3 +1064,82 @@ video:fullscreen, video:-webkit-full-screen { object-fit: contain !important; ba
   body.has-cursor .work-btn, body.has-cursor .reel-frame { cursor: pointer; }
   .work-hover, .work-btn::after, .tools svg { transition: none; }
 }
+
+/* wait (max 2.5s) for content.json so old text doesn't flash */
+html.cms-wait .hero-inner, html.cms-wait #workGrid, html.cms-wait .about-body { visibility: hidden; }
+.about-text p:last-child { margin-block-end: 42px; }
+
+/* ================= mobile polish ================= */
+@media (max-width: 760px) {
+  :root { --pad: 20px; }
+  .section { padding-block: 76px; }
+  .section-head { gap: 22px; }
+
+  /* header: transparent over the photo, glass once scrolled */
+
+  /* hero: full-bleed photo, name sits on the bottom of it */
+  .hero-media { height: 78svh; min-height: 520px; }
+  .hero-media img { object-position: 50% 22%; }
+  .hero-media::after {
+    background: linear-gradient(to top, var(--bg) 0%, rgba(10,10,11,.86) 22%, rgba(10,10,11,.25) 50%, rgba(10,10,11,0) 70%);
+  }
+  .hero-text { position: relative; z-index: 1; margin-block-start: -34svh; padding-block: 0 56px; }
+  .hero-eyebrow { margin-block-end: 14px; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--accent); vertical-align: middle; margin-inline-end: 10px; }
+  .hero-title { font-size: clamp(2.7rem, 13vw, 3.6rem); margin-block-end: 6px; }
+  .hero-latin { margin-block-end: 20px; }
+  .hero-lead { font-size: 15px; line-height: 1.9; margin-block-end: 28px; }
+  .hero-actions { gap: 10px; }
+  .hero-actions .cta, .hero-actions .cta-ghost { flex: 1; justify-content: center; text-align: center; }
+  .hero-loc { margin-block-start: 22px; }
+
+  /* filters on one swipeable line */
+  .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--pad) * -1); padding-inline: var(--pad); }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+
+  /* works: swipeable row with the next card peeking */
+  .work-grid.work-grid {
+    display: flex; gap: 14px; align-items: flex-start;
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad);
+    margin-inline: calc(var(--pad) * -1); padding-inline: var(--pad); padding-block-end: 6px;
+    scrollbar-width: none; overscroll-behavior-x: contain;
+  }
+  .work-grid::-webkit-scrollbar { display: none; }
+  .work-grid.work-grid .work-item { flex: 0 0 70vw; scroll-snap-align: start; margin: 0; }
+  .work-grid.work-grid .work-item--wide { flex-basis: 86vw; }
+  .work-grid .work-btn { border-radius: 10px; }
+  .work-item figcaption h3 { font-size: 15px; }
+
+  .work-dots { display: flex; justify-content: center; gap: 6px; margin-block-start: 22px; }
+  .work-dots i { width: 6px; height: 6px; border-radius: 3px; background: rgba(237,234,228,.22); transition: width .4s var(--ease), background .4s; }
+  .work-dots i.on { width: 22px; background: var(--accent); }
+
+  /* the card in view plays quietly; show a thin gold frame on it */
+  .work-btn.is-current::after { opacity: 1; box-shadow: inset 0 0 0 1px rgba(200,183,154,.5); background: linear-gradient(to top, rgba(10,10,11,.6), rgba(10,10,11,0) 40%); }
+  .work-btn.is-current .work-hover { opacity: 1; transform: none; }
+  .work-btn.is-current .work-play { opacity: 0; }
+
+  /* reel */
+  .reel-frame { width: 76vw; margin-block-start: 34px; border-radius: 12px; }
+
+  /* about */
+  .about-grid { gap: 22px; }
+  .about-body .lead { font-size: 1.12rem; margin-block-end: 18px; }
+  .about-text p { font-size: 14.5px; }
+  .tools { grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: none; }
+  .tools li { padding: 14px; gap: 10px; border-radius: 12px; }
+  .tools svg { width: 22px; height: 22px; }
+  .tools b { font-size: 13px; }
+  .tools small { font-size: 11px; }
+
+  /* contact */
+  .contact-title { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  .contact-mail { font-size: clamp(1.05rem, 5.2vw, 1.4rem); word-break: break-all; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .work-grid.work-grid { scroll-snap-type: none; }
+}
+
+/* email addresses keep Latin digits */
+.contact-mail, .mobile-menu-foot a[data-c-email] { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; direction: ltr; unicode-bidi: isolate; }

@@ -341,3 +341,64 @@ if (yearEl) yearEl.textContent = faDigits(jalaliYear());
     b.addEventListener('pointerleave', () => { b.style.transform = ''; });
   });
 })();
+
+/* ================= mobile: swipe row ================= */
+(() => {
+  const grid = document.getElementById('workGrid');
+  if (!grid) return;
+  const mq = window.matchMedia('(max-width: 760px)');
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const dots = document.createElement('div');
+  dots.className = 'work-dots';
+  dots.setAttribute('aria-hidden', 'true');
+  grid.after(dots);
+
+  const shown = () => Array.from(grid.querySelectorAll('.work-item')).filter((it) => !it.classList.contains('is-hidden'));
+
+  let cur = -1;
+  const setCurrent = (i) => {
+    const list = shown();
+    if (i === cur) return;
+    cur = i;
+    list.forEach((it, k) => {
+      const btn = it.querySelector('.work-btn');
+      const v = btn && btn.querySelector('video');
+      const on = k === i && mq.matches;
+      if (btn) btn.classList.toggle('is-current', on);
+      if (!v) return;
+      if (on && !calm) { v.preload = 'auto'; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      else { v.pause(); }
+    });
+    Array.from(dots.children).forEach((d, k) => d.classList.toggle('on', k === i));
+  };
+
+  const build = () => {
+    const n = shown().length;
+    dots.innerHTML = mq.matches && n > 1 ? '<i></i>'.repeat(n) : '';
+    cur = -1;
+    grid.scrollTo({ left: 0 });
+    pick();
+  };
+
+  const pick = () => {
+    if (!mq.matches) { shown().forEach((it) => it.querySelector('.work-btn')?.classList.remove('is-current')); return; }
+    const r = grid.getBoundingClientRect();
+    const inView = r.top < innerHeight * 0.85 && r.bottom > innerHeight * 0.15;
+    if (!inView) { setCurrent(-2); return; }
+    const anchor = r.right - 20; // RTL: cards start from the right edge
+    let best = 0, bestD = Infinity;
+    shown().forEach((it, k) => {
+      const d = Math.abs(it.getBoundingClientRect().right - anchor);
+      if (d < bestD) { bestD = d; best = k; }
+    });
+    setCurrent(best);
+  };
+
+  let t;
+  const later = () => { clearTimeout(t); t = setTimeout(pick, 90); };
+  grid.addEventListener('scroll', later, { passive: true });
+  window.addEventListener('scroll', later, { passive: true });
+  document.querySelectorAll('.chip').forEach((c) => c.addEventListener('click', () => setTimeout(build, 30)));
+  (mq.addEventListener ? mq.addEventListener('change', build) : mq.addListener(build));
+  build();
+})();
